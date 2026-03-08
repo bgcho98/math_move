@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">매쓰무브</string>
+    <string name="default_web_client_id" translatable="false">894292676865-qieovtro7g7limj36kl9oh824ve3jbcv.apps.googleusercontent.com</string>
+
+
+    <!-- Common -->
+    <string name="ok">확인</string>
+    <string name="cancel">취소</string>
+    <string name="retry">다시하기</string>
+    <string name="next">다음</string>
+    <string name="back">뒤로</string>
+    <string name="loading">로딩 중…</string>
+
+    <!-- Login -->
+    <string name="welcome_title">매쓰무브</string>
+    <string name="welcome_subtitle">몸을 움직여 수학을 풀자!</string>
+    <string name="sign_in_google">구글로 로그인</string>
+    <string name="sign_out">로그아웃</string>
+
+    <!-- Home -->
+    <string name="stage_format">스테이지 %d</string>
+    <string name="stage_locked">잠김</string>
+    <string name="stage_clear">클리어!</string>
+    <string name="ranking">랭킹</string>
+    <string name="settings">설정</string>
+    <string name="my_profile">내 프로필</string>
+    <string name="max_stage">최고 스테이지: %d</string>
+
+    <!-- Game -->
+    <string name="game_start">게임 시작!</string>
+    <string name="game_ready">준비!</string>
+    <string name="problem_format" formatted="false">문제 %d / %d</string>
+    <string name="time_format">%d초</string>
+    <string name="correct">정답!</string>
+    <string name="wrong">틀렸어요!</string>
+    <string name="time_up">시간 초과!</string>
+    <string name="game_over">게임 오버</string>
+
+    <!-- Pose Actions -->
+    <string name="pose_left_hand">왼손 들기</string>
+    <string name="pose_right_hand">오른손 들기</string>
+    <string name="pose_left_foot">왼발 들기</string>
+    <string name="pose_right_foot">오른발 들기</string>
+    <string name="pose_hold">동작을 유지하세요!</string>
+    <string name="pose_detecting">동작 인식 중…</string>
+
+    <!-- Result -->
+    <string name="result_title">결과</string>
+    <string name="result_clear">스테이지 클리어!</string>
+    <string name="result_fail">아쉬워요!</string>
+    <string name="result_score" formatted="false">%d / %d 정답</string>
+    <string name="result_time">걸린 시간: %d초</string>
+    <string name="result_stars">별 %d개</string>
+    <string name="next_stage">다음 스테이지</string>
+    <string name="retry_stage">다시 도전</string>
+    <string name="go_home">홈으로</string>
+
+    <!-- Ranking -->
+    <string name="ranking_title">랭킹</string>
+    <string name="ranking_stage">스테이지 랭킹</string>
+    <string name="ranking_global">전체 랭킹</string>
+    <string name="ranking_empty">아직 기록이 없어요</string>
+    <string name="rank_format">%d위</string>
+
+    <!-- Ad -->
+    <string name="ad_loading">광고 로딩 중…</string>
+    <string name="ad_watch">광고를 시청하면 게임이 시작됩니다</string>
+
+    <!-- Permission -->
+    <string name="camera_permission_title">카메라 권한 필요</string>
+    <string name="camera_permission_message">동작 인식을 위해 카메라 권한이 필요합니다</string>
+    <string name="permission_grant">권한 허용</string>
+
+    <!-- Error -->
+    <string name="error_sign_in">로그인에 실패했습니다</string>
+    <string name="error_network">네트워크 연결을 확인해주세요</string>
+    <string name="error_camera">카메라를 시작할 수 없습니다</string>
+</resources>

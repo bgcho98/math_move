@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Math Move</string>
+
+    <!-- Common -->
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="retry">Retry</string>
+    <string name="next">Next</string>
+    <string name="back">Back</string>
+    <string name="loading">Loading…</string>
+
+    <!-- Login -->
+    <string name="welcome_title">Math Move</string>
+    <string name="welcome_subtitle">Move your body to solve math!</string>
+    <string name="sign_in_google">Sign in with Google</string>
+    <string name="sign_out">Sign Out</string>
+
+    <!-- Home -->
+    <string name="stage_format">Stage %d</string>
+    <string name="stage_locked">Locked</string>
+    <string name="stage_clear">Clear!</string>
+    <string name="ranking">Ranking</string>
+    <string name="settings">Settings</string>
+    <string name="my_profile">My Profile</string>
+    <string name="max_stage">Best Stage: %d</string>
+
+    <!-- Game -->
+    <string name="game_start">Game Start!</string>
+    <string name="game_ready">Ready!</string>
+    <string name="problem_format" formatted="false">Problem %d / %d</string>
+    <string name="time_format">%d sec</string>
+    <string name="correct">Correct!</string>
+    <string name="wrong">Wrong!</string>
+    <string name="time_up">Time\'s Up!</string>
+    <string name="game_over">Game Over</string>
+
+    <!-- Pose Actions -->
+    <string name="pose_left_hand">Raise Left Hand</string>
+    <string name="pose_right_hand">Raise Right Hand</string>
+    <string name="pose_left_foot">Raise Left Foot</string>
+    <string name="pose_right_foot">Raise Right Foot</string>
+    <string name="pose_hold">Hold your pose!</string>
+    <string name="pose_detecting">Detecting pose…</string>
+
+    <!-- Result -->
+    <string name="result_title">Result</string>
+    <string name="result_clear">Stage Clear!</string>
+    <string name="result_fail">Almost there!</string>
+    <string name="result_score" formatted="false">%d / %d Correct</string>
+    <string name="result_time">Time: %d sec</string>
+    <string name="result_stars">%d Stars</string>
+    <string name="next_stage">Next Stage</string>
+    <string name="retry_stage">Try Again</string>
+    <string name="go_home">Home</string>
+
+    <!-- Ranking -->
+    <string name="ranking_title">Ranking</string>
+    <string name="ranking_stage">Stage Ranking</string>
+    <string name="ranking_global">Global Ranking</string>
+    <string name="ranking_empty">No records yet</string>
+    <string name="rank_format">#%d</string>
+
+    <!-- Ad -->
+    <string name="ad_loading">Loading ad…</string>
+    <string name="ad_watch">Watch an ad to start the game</string>
+
+    <!-- Permission -->
+    <string name="camera_permission_title">Camera Permission Required</string>
+    <string name="camera_permission_message">Camera permission is needed for pose detection</string>
+    <string name="permission_grant">Grant Permission</string>
+
+    <!-- Error -->
+    <string name="error_sign_in">Sign in failed</string>
+    <string name="error_network">Please check your network connection</string>
+    <string name="error_camera">Unable to start camera</string>
+</resources>

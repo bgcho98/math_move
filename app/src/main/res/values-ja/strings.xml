@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">マスムーブ</string>
+
+    <!-- Common -->
+    <string name="ok">OK</string>
+    <string name="cancel">キャンセル</string>
+    <string name="retry">もう一度</string>
+    <string name="next">次へ</string>
+    <string name="back">戻る</string>
+    <string name="loading">読み込み中…</string>
+
+    <!-- Login -->
+    <string name="welcome_title">マスムーブ</string>
+    <string name="welcome_subtitle">体を動かして算数を解こう！</string>
+    <string name="sign_in_google">Googleでログイン</string>
+    <string name="sign_out">ログアウト</string>
+
+    <!-- Home -->
+    <string name="stage_format">ステージ %d</string>
+    <string name="stage_locked">ロック</string>
+    <string name="stage_clear">クリア！</string>
+    <string name="ranking">ランキング</string>
+    <string name="settings">設定</string>
+    <string name="my_profile">マイプロフィール</string>
+    <string name="max_stage">最高ステージ: %d</string>
+
+    <!-- Game -->
+    <string name="game_start">ゲームスタート！</string>
+    <string name="game_ready">準備！</string>
+    <string name="problem_format" formatted="false">問題 %d / %d</string>
+    <string name="time_format">%d秒</string>
+    <string name="correct">正解！</string>
+    <string name="wrong">不正解！</string>
+    <string name="time_up">時間切れ！</string>
+    <string name="game_over">ゲームオーバー</string>
+
+    <!-- Pose Actions -->
+    <string name="pose_left_hand">左手を上げる</string>
+    <string name="pose_right_hand">右手を上げる</string>
+    <string name="pose_left_foot">左足を上げる</string>
+    <string name="pose_right_foot">右足を上げる</string>
+    <string name="pose_hold">ポーズをキープ！</string>
+    <string name="pose_detecting">動作認識中…</string>
+
+    <!-- Result -->
+    <string name="result_title">結果</string>
+    <string name="result_clear">ステージクリア！</string>
+    <string name="result_fail">惜しい！</string>
+    <string name="result_score" formatted="false">%d / %d 正解</string>
+    <string name="result_time">かかった時間: %d秒</string>
+    <string name="result_stars">星 %d個</string>
+    <string name="next_stage">次のステージ</string>
+    <string name="retry_stage">もう一度挑戦</string>
+    <string name="go_home">ホームへ</string>
+
+    <!-- Ranking -->
+    <string name="ranking_title">ランキング</string>
+    <string name="ranking_stage">ステージランキング</string>
+    <string name="ranking_global">全体ランキング</string>
+    <string name="ranking_empty">まだ記録がありません</string>
+    <string name="rank_format">%d位</string>
+
+    <!-- Ad -->
+    <string name="ad_loading">広告読み込み中…</string>
+    <string name="ad_watch">広告を視聴するとゲームが始まります</string>
+
+    <!-- Permission -->
+    <string name="camera_permission_title">カメラの権限が必要です</string>
+    <string name="camera_permission_message">動作認識のためにカメラの権限が必要です</string>
+    <string name="permission_grant">権限を許可</string>
+
+    <!-- Error -->
+    <string name="error_sign_in">ログインに失敗しました</string>
+    <string name="error_network">ネットワーク接続を確認してください</string>
+    <string name="error_camera">カメラを起動できません</string>
+</resources>
