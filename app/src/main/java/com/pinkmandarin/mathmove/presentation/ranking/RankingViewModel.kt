@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pinkmandarin.mathmove.domain.repository.RankingRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import android.util.Log
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -116,6 +117,7 @@ class RankingViewModel @Inject constructor(
                     }
                 }
             } catch (e: Exception) {
+                Log.e("RankingViewModel", "Failed to load global ranking", e)
                 _uiState.update {
                     it.copy(
                         isLoading = false,
