@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.pinkmandarin.mathmove.R
@@ -83,12 +84,13 @@ fun PoseGuide(
     }
 }
 
+@Composable
 private fun getPoseDescription(pose: PoseAction): String {
     return when (pose) {
-        PoseAction.LEFT_HAND_UP -> "Raise left hand"
-        PoseAction.RIGHT_HAND_UP -> "Raise right hand"
-        PoseAction.LEFT_FOOT_UP -> "Raise left foot"
-        PoseAction.RIGHT_FOOT_UP -> "Raise right foot"
-        PoseAction.NONE -> "Stand still"
+        PoseAction.LEFT_HAND_UP -> stringResource(R.string.pose_left_hand)
+        PoseAction.RIGHT_HAND_UP -> stringResource(R.string.pose_right_hand)
+        PoseAction.LEFT_FOOT_UP -> stringResource(R.string.pose_left_foot)
+        PoseAction.RIGHT_FOOT_UP -> stringResource(R.string.pose_right_foot)
+        PoseAction.NONE -> stringResource(R.string.pose_stand_still)
     }
 }

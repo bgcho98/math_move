@@ -34,10 +34,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
+import com.pinkmandarin.mathmove.R
 import com.pinkmandarin.mathmove.domain.model.PoseAction
 import com.pinkmandarin.mathmove.presentation.theme.PrimaryOrange
 import java.util.concurrent.Executors
@@ -154,7 +156,7 @@ fun CameraPreview(
                     colors = ButtonDefaults.buttonColors(containerColor = PrimaryOrange)
                 ) {
                     Text(
-                        text = "Allow Camera",
+                        text = stringResource(R.string.allow_camera),
                         style = MaterialTheme.typography.titleMedium
                     )
                 }

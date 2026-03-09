@@ -51,10 +51,12 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.pinkmandarin.mathmove.R
 import coil.compose.AsyncImage
 import com.pinkmandarin.mathmove.presentation.theme.AvatarRingEnd
 import com.pinkmandarin.mathmove.presentation.theme.AvatarRingStart
@@ -136,7 +138,7 @@ fun SettingsScreen(
                         )
                     }
                     Text(
-                        text = "Settings",
+                        text = stringResource(R.string.settings),
                         color = TextOnPrimary,
                         fontSize = 22.sp,
                         fontWeight = FontWeight.Bold
@@ -261,7 +263,7 @@ fun SettingsScreen(
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Text(
-                                    text = uiState.userName.ifEmpty { "Player" },
+                                    text = uiState.userName.ifEmpty { stringResource(R.string.player) },
                                     color = Color.White,
                                     fontSize = 22.sp,
                                     fontWeight = FontWeight.Bold
@@ -291,21 +293,21 @@ fun SettingsScreen(
                 Spacer(modifier = Modifier.height(24.dp))
 
                 // ===== General Section =====
-                SectionLabel("General")
+                SectionLabel(stringResource(R.string.general))
                 Spacer(modifier = Modifier.height(8.dp))
 
                 SettingsMenuGroup {
                     SettingsMenuItem(
                         icon = Icons.Default.Info,
                         iconTint = StarGold,
-                        title = "Terms of Service",
+                        title = stringResource(R.string.terms_of_service),
                         onClick = { /* TODO */ }
                     )
                     MenuDivider()
                     SettingsMenuItem(
                         icon = Icons.Default.Lock,
                         iconTint = ElectricPurpleStart,
-                        title = "Privacy Policy",
+                        title = stringResource(R.string.privacy_policy),
                         onClick = { /* TODO */ }
                     )
                 }
@@ -313,21 +315,21 @@ fun SettingsScreen(
                 Spacer(modifier = Modifier.height(24.dp))
 
                 // ===== Account Section =====
-                SectionLabel("Account")
+                SectionLabel(stringResource(R.string.account))
                 Spacer(modifier = Modifier.height(8.dp))
 
                 SettingsMenuGroup {
                     SettingsMenuItem(
                         icon = Icons.AutoMirrored.Filled.ExitToApp,
                         iconTint = Color.White,
-                        title = "Sign Out",
+                        title = stringResource(R.string.sign_out),
                         onClick = { showLogoutDialog = true }
                     )
                     MenuDivider()
                     SettingsMenuItem(
                         icon = Icons.Default.Delete,
                         iconTint = HeartRed.copy(alpha = 0.8f),
-                        title = "Delete Account",
+                        title = stringResource(R.string.delete_account),
                         titleColor = HeartRed.copy(alpha = 0.8f),
                         onClick = { showDeleteDialog = true }
                     )
@@ -337,7 +339,7 @@ fun SettingsScreen(
 
                 // Version
                 Text(
-                    text = "Math Move v1.0",
+                    text = stringResource(R.string.version_format),
                     color = Color.White.copy(alpha = 0.3f),
                     fontSize = 12.sp,
                     modifier = Modifier.align(Alignment.CenterHorizontally)
@@ -370,7 +372,7 @@ fun SettingsScreen(
                 contentColor = Color.White,
                 action = {
                     Text(
-                        text = "OK",
+                        text = stringResource(R.string.ok),
                         color = StarGold,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier
@@ -388,19 +390,19 @@ fun SettingsScreen(
     if (showLogoutDialog) {
         AlertDialog(
             onDismissRequest = { showLogoutDialog = false },
-            title = { Text("Sign Out", fontWeight = FontWeight.Bold) },
-            text = { Text("Are you sure you want to sign out?") },
+            title = { Text(stringResource(R.string.sign_out), fontWeight = FontWeight.Bold) },
+            text = { Text(stringResource(R.string.sign_out_confirm)) },
             confirmButton = {
                 TextButton(onClick = {
                     showLogoutDialog = false
                     viewModel.signOut()
                 }) {
-                    Text("Sign Out", color = HeartRed, fontWeight = FontWeight.Bold)
+                    Text(stringResource(R.string.sign_out), color = HeartRed, fontWeight = FontWeight.Bold)
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showLogoutDialog = false }) {
-                    Text("Cancel")
+                    Text(stringResource(R.string.cancel))
                 }
             }
         )
@@ -411,22 +413,22 @@ fun SettingsScreen(
         AlertDialog(
             onDismissRequest = { showDeleteDialog = false },
             title = {
-                Text("Delete Account", color = HeartRed, fontWeight = FontWeight.Bold)
+                Text(stringResource(R.string.delete_account), color = HeartRed, fontWeight = FontWeight.Bold)
             },
             text = {
-                Text("This will permanently delete your account and all game data. This action cannot be undone.")
+                Text(stringResource(R.string.delete_account_confirm))
             },
             confirmButton = {
                 TextButton(onClick = {
                     showDeleteDialog = false
                     viewModel.deleteAccount()
                 }) {
-                    Text("Delete", color = HeartRed, fontWeight = FontWeight.Bold)
+                    Text(stringResource(R.string.delete), color = HeartRed, fontWeight = FontWeight.Bold)
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showDeleteDialog = false }) {
-                    Text("Cancel")
+                    Text(stringResource(R.string.cancel))
                 }
             }
         )

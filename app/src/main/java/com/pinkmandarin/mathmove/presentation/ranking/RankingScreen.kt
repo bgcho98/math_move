@@ -49,9 +49,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.pinkmandarin.mathmove.R
 import com.pinkmandarin.mathmove.presentation.theme.CorrectGreen
 import com.pinkmandarin.mathmove.presentation.theme.PrimaryOrange
 import com.pinkmandarin.mathmove.presentation.theme.SecondaryBlue
@@ -79,7 +81,7 @@ fun RankingScreen(
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "Ranking",
+                            text = stringResource(R.string.ranking_title),
                             style = MaterialTheme.typography.titleLarge,
                             color = TextOnPrimary,
                             fontWeight = FontWeight.Bold
@@ -125,7 +127,7 @@ fun RankingScreen(
                     onClick = { viewModel.selectTab(RankingTab.STAGE) },
                     text = {
                         Text(
-                            text = "Stage Ranking",
+                            text = stringResource(R.string.ranking_stage),
                             style = MaterialTheme.typography.titleSmall,
                             fontWeight = FontWeight.Bold
                         )
@@ -136,7 +138,7 @@ fun RankingScreen(
                     onClick = { viewModel.selectTab(RankingTab.GLOBAL) },
                     text = {
                         Text(
-                            text = "Global Ranking",
+                            text = stringResource(R.string.ranking_global),
                             style = MaterialTheme.typography.titleSmall,
                             fontWeight = FontWeight.Bold
                         )
@@ -190,13 +192,13 @@ fun RankingScreen(
                     ) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Text(
-                                text = "No rankings yet!",
+                                text = stringResource(R.string.ranking_empty),
                                 style = MaterialTheme.typography.headlineSmall,
                                 color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f)
                             )
                             Spacer(modifier = Modifier.height(8.dp))
                             Text(
-                                text = "Be the first to play!",
+                                text = stringResource(R.string.ranking_be_first),
                                 style = MaterialTheme.typography.bodyLarge,
                                 color = SecondaryBlue
                             )

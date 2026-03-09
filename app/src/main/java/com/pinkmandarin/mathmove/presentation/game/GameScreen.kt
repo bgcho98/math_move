@@ -40,10 +40,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.pinkmandarin.mathmove.R
 import com.pinkmandarin.mathmove.presentation.theme.HeartRed
 import com.pinkmandarin.mathmove.presentation.theme.LockedGray
 import com.pinkmandarin.mathmove.presentation.theme.NeonCyan
@@ -150,7 +152,7 @@ fun GameScreen(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = if (uiState.countdownValue > 0) "${uiState.countdownValue}" else "GO!",
+                    text = if (uiState.countdownValue > 0) "${uiState.countdownValue}" else stringResource(R.string.go),
                     style = TextStyle(
                         fontSize = 96.sp,
                         fontWeight = FontWeight.ExtraBold,
@@ -197,7 +199,7 @@ private fun GameTopBar(
                     )
                 }
                 Text(
-                    text = "Stage $stageNumber",
+                    text = stringResource(R.string.stage_format, stageNumber),
                     style = TextStyle(
                         fontSize = 22.sp,
                         fontWeight = FontWeight.Bold,
@@ -268,11 +270,11 @@ private fun PoseStatusBar(
     poseHoldProgress: Float
 ) {
     val poseText = when (detectedPose) {
-        com.pinkmandarin.mathmove.domain.model.PoseAction.LEFT_HAND_UP -> "Left Hand Up detected!"
-        com.pinkmandarin.mathmove.domain.model.PoseAction.RIGHT_HAND_UP -> "Right Hand Up detected!"
-        com.pinkmandarin.mathmove.domain.model.PoseAction.LEFT_FOOT_UP -> "Left Foot Up detected!"
-        com.pinkmandarin.mathmove.domain.model.PoseAction.RIGHT_FOOT_UP -> "Right Foot Up detected!"
-        com.pinkmandarin.mathmove.domain.model.PoseAction.NONE -> "Move your body to answer!"
+        com.pinkmandarin.mathmove.domain.model.PoseAction.LEFT_HAND_UP -> stringResource(R.string.pose_detected_left_hand)
+        com.pinkmandarin.mathmove.domain.model.PoseAction.RIGHT_HAND_UP -> stringResource(R.string.pose_detected_right_hand)
+        com.pinkmandarin.mathmove.domain.model.PoseAction.LEFT_FOOT_UP -> stringResource(R.string.pose_detected_left_foot)
+        com.pinkmandarin.mathmove.domain.model.PoseAction.RIGHT_FOOT_UP -> stringResource(R.string.pose_detected_right_foot)
+        com.pinkmandarin.mathmove.domain.model.PoseAction.NONE -> stringResource(R.string.pose_move_body)
     }
 
     val isActive = detectedPose != com.pinkmandarin.mathmove.domain.model.PoseAction.NONE

@@ -51,6 +51,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
+import androidx.compose.ui.res.stringResource
 import com.pinkmandarin.mathmove.R
 import com.pinkmandarin.mathmove.presentation.theme.AvatarRingEnd
 import com.pinkmandarin.mathmove.presentation.theme.AvatarRingStart
@@ -300,7 +301,7 @@ fun HomeScreen(
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        text = "Stage ${uiState.maxClearedStage + 1} is waiting!",
+                        text = stringResource(R.string.stage_waiting, uiState.maxClearedStage + 1),
                         color = Color.White,
                         fontSize = 18.sp,
                         fontWeight = FontWeight.SemiBold

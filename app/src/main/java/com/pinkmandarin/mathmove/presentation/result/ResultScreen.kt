@@ -41,9 +41,11 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.pinkmandarin.mathmove.R
 import com.pinkmandarin.mathmove.presentation.theme.CorrectGreen
 import com.pinkmandarin.mathmove.presentation.theme.LockedGray
 import com.pinkmandarin.mathmove.presentation.theme.PrimaryOrange
@@ -108,7 +110,7 @@ fun ResultScreen(
 
             // Result Title
             Text(
-                text = if (uiState.isCleared) "Stage Cleared!" else "Game Over",
+                text = if (uiState.isCleared) stringResource(R.string.result_clear) else stringResource(R.string.game_over),
                 style = MaterialTheme.typography.displayMedium.copy(
                     fontWeight = FontWeight.ExtraBold
                 ),
@@ -180,7 +182,7 @@ fun ResultScreen(
                     }
 
                     Text(
-                        text = "Correct Answers",
+                        text = stringResource(R.string.correct_answers),
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f)
                     )
@@ -192,7 +194,7 @@ fun ResultScreen(
                     val minutes = totalSeconds / 60
                     val seconds = totalSeconds % 60
                     Text(
-                        text = String.format("Time: %02d:%02d", minutes, seconds),
+                        text = String.format(stringResource(R.string.time_format_mmss), minutes, seconds),
                         style = MaterialTheme.typography.titleLarge,
                         color = SecondaryBlue,
                         fontWeight = FontWeight.Bold
@@ -213,7 +215,7 @@ fun ResultScreen(
                     colors = ButtonDefaults.buttonColors(containerColor = CorrectGreen)
                 ) {
                     Text(
-                        text = "Next Stage",
+                        text = stringResource(R.string.next_stage),
                         style = MaterialTheme.typography.titleLarge,
                         color = Color.White,
                         fontWeight = FontWeight.Bold
@@ -237,7 +239,7 @@ fun ResultScreen(
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = "Retry",
+                    text = stringResource(R.string.retry),
                     style = MaterialTheme.typography.titleMedium,
                     color = PrimaryOrange,
                     fontWeight = FontWeight.Bold
@@ -260,7 +262,7 @@ fun ResultScreen(
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = "Home",
+                    text = stringResource(R.string.go_home),
                     style = MaterialTheme.typography.titleMedium,
                     color = SecondaryBlue,
                     fontWeight = FontWeight.Bold

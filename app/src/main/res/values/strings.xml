@@ -13,10 +13,12 @@
     <string name="loading">로딩 중…</string>
 
     <!-- Login -->
-    <string name="welcome_title">매쓰무브</string>
+    <string name="welcome_title">Math Move</string>
     <string name="welcome_subtitle">몸을 움직여 수학을 풀자!</string>
     <string name="sign_in_google">구글로 로그인</string>
     <string name="sign_out">로그아웃</string>
+    <string name="lets_get_started">시작해볼까요!</string>
+    <string name="learn_math_fun">재미있게 수학을 배우자! ⭐</string>
 
     <!-- Home -->
     <string name="stage_format">스테이지 %d</string>
@@ -26,6 +28,7 @@
     <string name="settings">설정</string>
     <string name="my_profile">내 프로필</string>
     <string name="max_stage">최고 스테이지: %d</string>
+    <string name="stage_waiting">스테이지 %d 도전하기!</string>
 
     <!-- Game -->
     <string name="game_start">게임 시작!</string>
@@ -55,6 +58,8 @@
     <string name="next_stage">다음 스테이지</string>
     <string name="retry_stage">다시 도전</string>
     <string name="go_home">홈으로</string>
+    <string name="correct_answers">정답 수</string>
+    <string name="time_format_mmss">시간: %02d:%02d</string>
 
     <!-- Ranking -->
     <string name="ranking_title">랭킹</string>
@@ -76,4 +81,32 @@
     <string name="error_sign_in">로그인에 실패했습니다</string>
     <string name="error_network">네트워크 연결을 확인해주세요</string>
     <string name="error_camera">카메라를 시작할 수 없습니다</string>
+
+    <!-- Additional UI strings -->
+    <string name="welcome_message">환영합니다!</string>
+    <string name="ranking_be_first">첫 번째 플레이어가 되어보세요!</string>
+    <string name="go">시작!</string>
+    <string name="pose_l_hand">왼손</string>
+    <string name="pose_r_hand">오른손</string>
+    <string name="pose_l_foot">왼발</string>
+    <string name="pose_r_foot">오른발</string>
+    <string name="pose_stand_still">가만히 서기</string>
+    <string name="pose_detected_left_hand">왼손 들기 감지!</string>
+    <string name="pose_detected_right_hand">오른손 들기 감지!</string>
+    <string name="pose_detected_left_foot">왼발 들기 감지!</string>
+    <string name="pose_detected_right_foot">오른발 들기 감지!</string>
+    <string name="pose_move_body">몸을 움직여 답하세요!</string>
+    <string name="allow_camera">카메라 허용</string>
+
+    <!-- Settings -->
+    <string name="general">일반</string>
+    <string name="account">계정</string>
+    <string name="terms_of_service">이용약관</string>
+    <string name="privacy_policy">개인정보 처리방침</string>
+    <string name="delete_account">계정 삭제</string>
+    <string name="player">플레이어</string>
+    <string name="sign_out_confirm">로그아웃 하시겠습니까?</string>
+    <string name="delete_account_confirm">계정과 모든 게임 데이터가 영구적으로 삭제됩니다. 이 작업은 되돌릴 수 없습니다.</string>
+    <string name="delete">삭제</string>
+    <string name="version_format">Math Move v1.0</string>
 </resources>

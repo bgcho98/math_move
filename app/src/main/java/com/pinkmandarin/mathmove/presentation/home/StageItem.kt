@@ -40,8 +40,10 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.pinkmandarin.mathmove.R
 import com.pinkmandarin.mathmove.domain.model.Stage
 import com.pinkmandarin.mathmove.presentation.theme.BubbleLilac
 import com.pinkmandarin.mathmove.presentation.theme.CandyPinkEnd
@@ -343,7 +345,7 @@ fun StageItem(
                                 contentAlignment = Alignment.Center
                             ) {
                                 Text(
-                                    text = "GO!",
+                                    text = stringResource(R.string.go),
                                     color = TextOnPrimary,
                                     fontSize = 14.sp,
                                     fontWeight = FontWeight.ExtraBold

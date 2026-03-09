@@ -35,6 +35,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -278,12 +279,13 @@ private fun AnswerChoiceCard(
     }
 }
 
+@Composable
 private fun getPoseLabel(action: PoseAction): String {
     return when (action) {
-        PoseAction.LEFT_HAND_UP -> "L Hand"
-        PoseAction.RIGHT_HAND_UP -> "R Hand"
-        PoseAction.LEFT_FOOT_UP -> "L Foot"
-        PoseAction.RIGHT_FOOT_UP -> "R Foot"
+        PoseAction.LEFT_HAND_UP -> stringResource(R.string.pose_l_hand)
+        PoseAction.RIGHT_HAND_UP -> stringResource(R.string.pose_r_hand)
+        PoseAction.LEFT_FOOT_UP -> stringResource(R.string.pose_l_foot)
+        PoseAction.RIGHT_FOOT_UP -> stringResource(R.string.pose_r_foot)
         PoseAction.NONE -> ""
     }
 }

@@ -24,8 +24,10 @@ import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.pinkmandarin.mathmove.R
 import com.pinkmandarin.mathmove.domain.model.MathProblem
 import com.pinkmandarin.mathmove.presentation.theme.CorrectGreen
 import com.pinkmandarin.mathmove.presentation.theme.NeonCyan
@@ -135,7 +137,7 @@ fun ProblemOverlay(
                         .padding(horizontal = 24.dp, vertical = 12.dp)
                 ) {
                     Text(
-                        text = if (isAnswerCorrect == true) "Correct!" else "Wrong!",
+                        text = if (isAnswerCorrect == true) stringResource(R.string.correct) else stringResource(R.string.wrong),
                         style = TextStyle(
                             fontSize = 28.sp,
                             fontWeight = FontWeight.ExtraBold,

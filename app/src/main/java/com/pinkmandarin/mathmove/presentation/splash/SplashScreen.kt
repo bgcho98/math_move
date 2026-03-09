@@ -39,6 +39,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -288,9 +289,10 @@ fun SplashScreen(
             modifier = Modifier.scale(scaleAnim.value)
         ) {
             // Colorful "Math Move" title with each letter a different color
+            val appName = stringResource(R.string.app_name)
             Text(
                 text = buildAnnotatedString {
-                    val title = "Math Move"
+                    val title = appName
                     val colors = listOf(
                         Color(0xFFFF6B6B), // Red
                         Color(0xFFFFD93D), // Yellow
@@ -326,7 +328,7 @@ fun SplashScreen(
 
             // Subtitle
             Text(
-                text = "Move your body, solve math!",
+                text = stringResource(R.string.welcome_subtitle),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = Color.White.copy(alpha = 0.85f),

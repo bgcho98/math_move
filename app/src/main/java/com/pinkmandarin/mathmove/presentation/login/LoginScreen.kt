@@ -42,6 +42,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -143,7 +144,7 @@ fun LoginScreen(
 
             // Big friendly welcome text
             Text(
-                text = "Welcome!",
+                text = stringResource(R.string.welcome_message),
                 fontSize = 42.sp,
                 fontWeight = FontWeight.ExtraBold,
                 color = Color.White,
@@ -154,9 +155,10 @@ fun LoginScreen(
             Spacer(modifier = Modifier.height(8.dp))
 
             // Colorful app name
+            val appName = stringResource(R.string.app_name)
             Text(
                 text = buildAnnotatedString {
-                    val title = "Math Move"
+                    val title = appName
                     val colors = listOf(
                         Color(0xFFFF6B6B),
                         Color(0xFFFFD93D),
@@ -213,7 +215,7 @@ fun LoginScreen(
 
             // Subtitle
             Text(
-                text = "Move your body\nSolve the math!",
+                text = stringResource(R.string.welcome_subtitle),
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Medium,
                 color = Color.White.copy(alpha = 0.8f),
@@ -243,7 +245,7 @@ fun LoginScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = "Let's get started!",
+                        text = stringResource(R.string.lets_get_started),
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
                         color = TextPrimary,
@@ -290,7 +292,7 @@ fun LoginScreen(
                                 )
                                 Spacer(modifier = Modifier.width(12.dp))
                                 Text(
-                                    text = "Sign in with Google",
+                                    text = stringResource(R.string.sign_in_google),
                                     fontSize = 18.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = Color.White
@@ -305,7 +307,7 @@ fun LoginScreen(
 
             // Fun encouragement text
             Text(
-                text = "Let's learn math with fun! \u2B50",
+                text = stringResource(R.string.learn_math_fun),
                 fontSize = 18.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = StarGold,
