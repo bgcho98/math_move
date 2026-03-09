@@ -7,6 +7,7 @@ data class RankingEntry(
     val maxClearedStage: Int = 0,
     val totalStars: Int = 0,
     val bestTime: Long = 0L,
+    val avgBestTime: Long = 0L,
     val stageNumber: Int = 0,
     val stars: Int = 0,
     val updatedAt: Long = System.currentTimeMillis()

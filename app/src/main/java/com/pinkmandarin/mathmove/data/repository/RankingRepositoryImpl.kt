@@ -43,7 +43,7 @@ class RankingRepositoryImpl @Inject constructor(
             .document("global")
             .collection("entries")
             .orderBy("maxClearedStage", Query.Direction.DESCENDING)
-            .orderBy("bestTime", Query.Direction.ASCENDING)
+            .orderBy("avgBestTime", Query.Direction.ASCENDING)
             .limit(limit.toLong())
             .addSnapshotListener { snapshot, error ->
                 if (error != null) {

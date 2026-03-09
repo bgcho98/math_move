@@ -1,6 +1,7 @@
 package com.pinkmandarin.mathmove.data.repository
 
 import com.google.firebase.firestore.FirebaseFirestore
+import com.pinkmandarin.mathmove.data.model.RankingEntry
 import com.pinkmandarin.mathmove.data.model.StageRecord
 import com.pinkmandarin.mathmove.domain.model.GameResult
 import com.pinkmandarin.mathmove.domain.model.Stage
@@ -96,13 +97,98 @@ class GameRepositoryImpl @Inject constructor(
             }
 
             // Update max cleared stage in user document
-            if (result.cleared) {
-                val userRef = firestore.collection("users").document(userId)
-                val userDoc = userRef.get().await()
-                val currentMax = userDoc.getLong("maxClearedStage")?.toInt() ?: 0
-                if (result.stageNumber > currentMax) {
-                    userRef.update("maxClearedStage", result.stageNumber).await()
+            val userRef = firestore.collection("users").document(userId)
+            val userDoc = userRef.get().await()
+            val currentMax = userDoc.getLong("maxClearedStage")?.toInt() ?: 0
+            if (result.cleared && result.stageNumber > currentMax) {
+                userRef.update("maxClearedStage", result.stageNumber).await()
+            }
+
+            // Update ranking collections
+            if (stars > 0) {
+                val displayName = userDoc.getString("displayName") ?: ""
+                val photoUrl = userDoc.getString("photoUrl")
+
+                // Stage ranking: rankings/stages/stage_{N}/{userId}
+                val stageRankRef = firestore
+                    .collection("rankings")
+                    .document("stages")
+                    .collection("stage_${result.stageNumber}")
+                    .document(userId)
+
+                val existingStageRank = stageRankRef.get().await()
+                    .toObject(RankingEntry::class.java)
+
+                val shouldUpdateStageRank = existingStageRank == null ||
+                        stars > existingStageRank.stars ||
+                        (stars == existingStageRank.stars && result.timeMillis < existingStageRank.bestTime)
+
+                if (shouldUpdateStageRank) {
+                    stageRankRef.set(
+                        RankingEntry(
+                            uid = userId,
+                            displayName = displayName,
+                            photoUrl = photoUrl,
+                            bestTime = if (existingStageRank != null && existingStageRank.bestTime > 0L) {
+                                minOf(result.timeMillis, existingStageRank.bestTime)
+                            } else {
+                                result.timeMillis
+                            },
+                            stageNumber = result.stageNumber,
+                            stars = maxOf(stars, existingStageRank?.stars ?: 0),
+                            updatedAt = System.currentTimeMillis()
+                        )
+                    ).await()
                 }
+
+                // Global ranking: rankings/global/entries/{userId}
+                val globalRankRef = firestore
+                    .collection("rankings")
+                    .document("global")
+                    .collection("entries")
+                    .document(userId)
+
+                // Calculate total stars from all stage records
+                val allStages = firestore
+                    .collection("users")
+                    .document(userId)
+                    .collection("stages")
+                    .get()
+                    .await()
+
+                val clearedStages = allStages.documents.filter { doc ->
+                    doc.getBoolean("cleared") == true
+                }
+
+                val totalStars = allStages.documents.sumOf { doc ->
+                    doc.getLong("stars")?.toInt() ?: 0
+                }
+
+                val avgBestTime = if (clearedStages.isNotEmpty()) {
+                    clearedStages.sumOf { doc ->
+                        doc.getLong("bestTime") ?: 0L
+                    } / clearedStages.size
+                } else {
+                    0L
+                }
+
+                val newMax = if (result.cleared) {
+                    maxOf(currentMax, result.stageNumber)
+                } else {
+                    currentMax
+                }
+
+                globalRankRef.set(
+                    RankingEntry(
+                        uid = userId,
+                        displayName = displayName,
+                        photoUrl = photoUrl,
+                        maxClearedStage = newMax,
+                        totalStars = totalStars,
+                        avgBestTime = avgBestTime,
+                        updatedAt = System.currentTimeMillis()
+                    )
+                ).await()
             }
 
             Result.success(Unit)

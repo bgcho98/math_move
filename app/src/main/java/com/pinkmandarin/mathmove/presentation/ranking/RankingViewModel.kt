@@ -105,7 +105,7 @@ class RankingViewModel @Inject constructor(
                             displayName = entry.displayName,
                             photoUrl = entry.photoUrl,
                             score = "Stage ${entry.maxClearedStage}",
-                            detail = "${entry.totalStars} total stars"
+                            detail = "⭐ ${entry.totalStars} · avg ${formatTime(entry.avgBestTime)}"
                         )
                     }
                     _uiState.update {
