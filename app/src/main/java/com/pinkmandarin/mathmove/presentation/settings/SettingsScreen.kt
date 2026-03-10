@@ -1,5 +1,6 @@
 package com.pinkmandarin.mathmove.presentation.settings
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -50,6 +51,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -57,6 +59,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.pinkmandarin.mathmove.R
+import android.content.Intent
+import android.net.Uri
 import coil.compose.AsyncImage
 import com.pinkmandarin.mathmove.presentation.theme.AvatarRingEnd
 import com.pinkmandarin.mathmove.presentation.theme.AvatarRingStart
@@ -77,6 +81,7 @@ fun SettingsScreen(
     onNameUpdated: () -> Unit = {},
     viewModel: SettingsViewModel = hiltViewModel()
 ) {
+    val context = androidx.compose.ui.platform.LocalContext.current
     val uiState by viewModel.uiState.collectAsState()
     var isEditingName by remember { mutableStateOf(false) }
     var editName by remember(uiState.userName) { mutableStateOf(uiState.userName) }
@@ -97,19 +102,22 @@ fun SettingsScreen(
         }
     }
 
-    val backgroundGradient = Brush.verticalGradient(
-        colors = listOf(
-            GradientPurpleStart,
-            GradientPurpleEnd,
-            GradientPurpleEnd.copy(alpha = 0.7f)
-        )
-    )
-
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(backgroundGradient)
+        modifier = Modifier.fillMaxSize()
     ) {
+        // Background image
+        Image(
+            painter = painterResource(id = R.drawable.first_screen_bg),
+            contentDescription = null,
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop
+        )
+        // Dark overlay for readability
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Black.copy(alpha = 0.5f))
+        )
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
@@ -303,14 +311,18 @@ fun SettingsScreen(
                         icon = Icons.Default.Info,
                         iconTint = StarGold,
                         title = stringResource(R.string.terms_of_service),
-                        onClick = { /* TODO */ }
+                        onClick = {
+                            context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://bgcho98.github.io/PinkMandarin/math-move/terms.html")))
+                        }
                     )
                     MenuDivider()
                     SettingsMenuItem(
                         icon = Icons.Default.Lock,
                         iconTint = ElectricPurpleStart,
                         title = stringResource(R.string.privacy_policy),
-                        onClick = { /* TODO */ }
+                        onClick = {
+                            context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://bgcho98.github.io/PinkMandarin/math-move/privacy.html")))
+                        }
                     )
                 }
 

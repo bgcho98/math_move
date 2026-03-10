@@ -2,6 +2,7 @@ package com.pinkmandarin.mathmove.presentation.ranking
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -49,6 +50,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -74,8 +77,8 @@ private val SilverMedal = Color(0xFFC0C0C0)
 private val BronzeMedal = Color(0xFFCD7F32)
 
 private val DarkSurface = Color(0xFF1A1A2E)
-private val DarkCard = Color(0xFF16213E)
-private val DarkCardLight = Color(0xFF1E2A4A)
+private val DarkCard = Color(0x9916213E)
+private val DarkCardLight = Color(0x991E2A4A)
 private val AccentPurple = Color(0xFF7C3AED)
 private val AccentCyan = Color(0xFF06B6D4)
 private val SubtleText = Color(0xFF94A3B8)
@@ -88,52 +91,67 @@ fun RankingScreen(
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(
-                            imageVector = Icons.Default.Star,
-                            contentDescription = null,
-                            tint = StarGold,
-                            modifier = Modifier.size(28.dp)
-                        )
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text(
-                            text = stringResource(R.string.ranking_title),
-                            style = MaterialTheme.typography.titleLarge,
-                            color = TextOnPrimary,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
-                },
-                navigationIcon = {
-                    IconButton(onClick = onBackClick) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back",
-                            tint = TextOnPrimary
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color.Transparent
-                ),
-                modifier = Modifier.background(
-                    Brush.horizontalGradient(
-                        listOf(ElectricPurpleStart, ElectricPurpleEnd)
-                    )
-                )
-            )
-        }
-    ) { paddingValues ->
-        Column(
+    Box(modifier = Modifier.fillMaxSize()) {
+        // Background image
+        Image(
+            painter = painterResource(id = R.drawable.first_screen_bg),
+            contentDescription = null,
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop
+        )
+        // Dark overlay for readability
+        Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues)
-                .background(DarkSurface)
-        ) {
+                .background(Color.Black.copy(alpha = 0.5f))
+        )
+
+        Scaffold(
+            containerColor = Color.Transparent,
+            topBar = {
+                TopAppBar(
+                    title = {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(
+                                imageVector = Icons.Default.Star,
+                                contentDescription = null,
+                                tint = StarGold,
+                                modifier = Modifier.size(28.dp)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = stringResource(R.string.ranking_title),
+                                style = MaterialTheme.typography.titleLarge,
+                                color = TextOnPrimary,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = onBackClick) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = "Back",
+                                tint = TextOnPrimary
+                            )
+                        }
+                    },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = Color.Transparent
+                    ),
+                    modifier = Modifier.background(
+                        Brush.horizontalGradient(
+                            listOf(ElectricPurpleStart, ElectricPurpleEnd)
+                        )
+                    )
+                )
+            }
+        ) { paddingValues ->
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+            ) {
             // Tab selector - pill style
             TabSelector(
                 selectedTab = uiState.selectedTab,
@@ -220,6 +238,7 @@ fun RankingScreen(
                     }
                 }
             }
+        }
         }
     }
 }
