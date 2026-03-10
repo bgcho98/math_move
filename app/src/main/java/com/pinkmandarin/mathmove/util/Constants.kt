@@ -15,6 +15,10 @@ object Constants {
     // AdMob
     const val AD_UNIT_ID_INTERSTITIAL_TEST = "ca-app-pub-3940256099942544/1033173712"
     const val AD_UNIT_ID_INTERSTITIAL_PROD = "" // Replace with production ad unit ID
+    const val AD_UNIT_ID_REWARDED_EXTRA_STAGE = "ca-app-pub-4390370436238752/1776954081"
+
+    // Daily Play Limit
+    const val DAILY_FREE_PLAYS = 3
 
     // Firebase Collections
     const val COLLECTION_USERS = "users"

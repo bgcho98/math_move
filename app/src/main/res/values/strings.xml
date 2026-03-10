@@ -68,9 +68,13 @@
     <string name="ranking_empty">아직 기록이 없어요</string>
     <string name="rank_format">%d위</string>
 
-    <!-- Ad -->
+    <!-- Ad / Daily Limit -->
     <string name="ad_loading">광고 로딩 중…</string>
     <string name="ad_watch">광고를 시청하면 게임이 시작됩니다</string>
+    <string name="daily_limit_title">오늘 플레이 완료!</string>
+    <string name="daily_limit_message">하루 3번 무료 플레이 가능!\n광고를 보면 1게임 더 할 수 있어요!</string>
+    <string name="daily_limit_watch_ad">광고 보고 계속하기</string>
+    <string name="daily_limit_later">나중에 할게요</string>
 
     <!-- Permission -->
     <string name="camera_permission_title">카메라 권한 필요</string>

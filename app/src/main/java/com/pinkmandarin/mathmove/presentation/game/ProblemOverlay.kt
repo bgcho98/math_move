@@ -95,12 +95,12 @@ fun ProblemOverlay(
                             color = NeonPink.copy(alpha = 0.5f),
                             shape = RoundedCornerShape(24.dp)
                         )
-                        .padding(horizontal = 60.dp, vertical = 40.dp)
+                        .padding(horizontal = 32.dp, vertical = 32.dp)
                 ) {
                     Text(
                         text = problem.questionText,
                         style = TextStyle(
-                            fontSize = 72.sp,
+                            fontSize = 56.sp,
                             fontWeight = FontWeight.ExtraBold,
                             shadow = Shadow(
                                 color = NeonPink,
@@ -109,7 +109,8 @@ fun ProblemOverlay(
                             )
                         ),
                         color = Color.White,
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
+                        maxLines = 1
                     )
                 }
             }

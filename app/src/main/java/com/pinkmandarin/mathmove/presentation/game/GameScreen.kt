@@ -1,5 +1,8 @@
 package com.pinkmandarin.mathmove.presentation.game
 
+import android.media.AudioAttributes
+import android.media.MediaPlayer
+import android.media.SoundPool
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -29,15 +32,18 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.res.stringResource
@@ -61,6 +67,85 @@ fun GameScreen(
     viewModel: GameViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
+
+    // Background music & SFX
+    val context = LocalContext.current
+    val bgmVolume = 0.4f
+    val bgmDuckVolume = 0.08f
+    val soundPool = remember {
+        SoundPool.Builder()
+            .setMaxStreams(2)
+            .setAudioAttributes(
+                AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_GAME)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .build()
+            )
+            .build()
+    }
+    val sfxCorrectId = remember { soundPool.load(context, R.raw.sfx_correct, 1) }
+    val sfxWrongId = remember { soundPool.load(context, R.raw.sfx_wrong, 1) }
+    val sfxBeepId = remember { soundPool.load(context, R.raw.sfx_countdown_beep, 1) }
+    val sfxGoId = remember { soundPool.load(context, R.raw.sfx_countdown_go, 1) }
+
+    val mediaPlayerRef = remember { mutableListOf<MediaPlayer>() }
+    DisposableEffect(Unit) {
+        val musicResIds = listOf(
+            R.raw.chrono_surge,
+            R.raw.pixel_gauntlet,
+            R.raw.pixel_pursuit
+        )
+        val mediaPlayer = MediaPlayer.create(context, musicResIds.random()).apply {
+            isLooping = true
+            setVolume(bgmVolume, bgmVolume)
+            start()
+        }
+        mediaPlayerRef.clear()
+        mediaPlayerRef.add(mediaPlayer)
+        onDispose {
+            mediaPlayer.stop()
+            mediaPlayer.release()
+            soundPool.release()
+        }
+    }
+
+    // Restore BGM volume when SFX events end
+    LaunchedEffect(uiState.showFeedback) {
+        val mp = mediaPlayerRef.firstOrNull() ?: return@LaunchedEffect
+        if (!uiState.showFeedback) {
+            mp.setVolume(bgmVolume, bgmVolume)
+        }
+    }
+    LaunchedEffect(uiState.isCountingDown) {
+        val mp = mediaPlayerRef.firstOrNull() ?: return@LaunchedEffect
+        if (!uiState.isCountingDown) {
+            mp.setVolume(bgmVolume, bgmVolume)
+        }
+    }
+
+    // Play SFX on answer feedback (duck BGM)
+    LaunchedEffect(uiState.showFeedback, uiState.isAnswerCorrect) {
+        if (uiState.showFeedback) {
+            mediaPlayerRef.firstOrNull()?.setVolume(bgmDuckVolume, bgmDuckVolume)
+            if (uiState.isAnswerCorrect == true) {
+                soundPool.play(sfxCorrectId, 1f, 1f, 1, 0, 1f)
+            } else if (uiState.isAnswerCorrect == false) {
+                soundPool.play(sfxWrongId, 1f, 1f, 1, 0, 1f)
+            }
+        }
+    }
+
+    // Play SFX on countdown (duck BGM)
+    LaunchedEffect(uiState.countdownValue, uiState.isCountingDown) {
+        if (uiState.isCountingDown) {
+            mediaPlayerRef.firstOrNull()?.setVolume(bgmDuckVolume, bgmDuckVolume)
+            if (uiState.countdownValue > 0) {
+                soundPool.play(sfxBeepId, 1f, 1f, 1, 0, 1f)
+            } else {
+                soundPool.play(sfxGoId, 1f, 1f, 1, 0, 1f)
+            }
+        }
+    }
 
     // Navigate to result when game is over
     LaunchedEffect(uiState.isGameOver) {

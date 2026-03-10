@@ -66,9 +66,13 @@
     <string name="ranking_empty">No records yet</string>
     <string name="rank_format">#%d</string>
 
-    <!-- Ad -->
+    <!-- Ad / Daily Limit -->
     <string name="ad_loading">Loading ad…</string>
     <string name="ad_watch">Watch an ad to start the game</string>
+    <string name="daily_limit_title">Daily plays used up!</string>
+    <string name="daily_limit_message">You can play 3 times a day for free.\nWatch an ad to play 1 more game!</string>
+    <string name="daily_limit_watch_ad">Watch ad to continue</string>
+    <string name="daily_limit_later">Maybe later</string>
 
     <!-- Permission -->
     <string name="camera_permission_title">Camera Permission Required</string>
