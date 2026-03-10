@@ -74,6 +74,7 @@ import com.pinkmandarin.mathmove.presentation.theme.TextOnPrimary
 fun SettingsScreen(
     onBackClick: () -> Unit,
     onLoggedOut: () -> Unit,
+    onNameUpdated: () -> Unit = {},
     viewModel: SettingsViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -91,6 +92,7 @@ fun SettingsScreen(
     LaunchedEffect(uiState.isNameUpdated) {
         if (uiState.isNameUpdated) {
             isEditingName = false
+            onNameUpdated()
             viewModel.consumeNameUpdated()
         }
     }

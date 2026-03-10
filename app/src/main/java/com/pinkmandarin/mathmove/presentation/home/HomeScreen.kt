@@ -71,9 +71,16 @@ fun HomeScreen(
     onStageClick: (Int) -> Unit,
     onRankingClick: () -> Unit,
     onSettingsClick: () -> Unit = {},
+    nameUpdated: Boolean = false,
+    onNameUpdateConsumed: () -> Unit = {},
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
+
+    if (nameUpdated) {
+        viewModel.refreshUserName()
+        onNameUpdateConsumed()
+    }
 
     // Sparkle rotation animation
     val infiniteTransition = rememberInfiniteTransition(label = "homeSparkle")

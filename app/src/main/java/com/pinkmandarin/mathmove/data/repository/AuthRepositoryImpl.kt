@@ -76,14 +76,17 @@ class AuthRepositoryImpl @Inject constructor(
             val user = firebaseAuth.currentUser
                 ?: return Result.failure(Exception("Not logged in"))
 
+            val uid = user.uid
+
             val profileUpdates = userProfileChangeRequest {
                 displayName = newName
             }
             user.updateProfile(profileUpdates).await()
+            user.reload().await()
 
-            // Update Firestore too
+            // Update Firestore user document
             firestore.collection("users")
-                .document(user.uid)
+                .document(uid)
                 .update(
                     mapOf(
                         "displayName" to newName,
@@ -91,6 +94,38 @@ class AuthRepositoryImpl @Inject constructor(
                     )
                 )
                 .await()
+
+            // Update global ranking entry
+            val globalRankRef = firestore
+                .collection("rankings")
+                .document("global")
+                .collection("entries")
+                .document(uid)
+            val globalDoc = globalRankRef.get().await()
+            if (globalDoc.exists()) {
+                globalRankRef.update("displayName", newName).await()
+            }
+
+            // Update stage ranking entries
+            val stagesSnapshot = firestore
+                .collection("users")
+                .document(uid)
+                .collection("stages")
+                .get()
+                .await()
+
+            for (stageDoc in stagesSnapshot.documents) {
+                val stageNumber = stageDoc.getLong("stageNumber")?.toInt() ?: continue
+                val stageRankRef = firestore
+                    .collection("rankings")
+                    .document("stages")
+                    .collection("stage_$stageNumber")
+                    .document(uid)
+                val stageRankDoc = stageRankRef.get().await()
+                if (stageRankDoc.exists()) {
+                    stageRankRef.update("displayName", newName).await()
+                }
+            }
 
             Result.success(Unit)
         } catch (e: Exception) {

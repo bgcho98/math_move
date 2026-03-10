@@ -83,4 +83,18 @@ class HomeViewModel @Inject constructor(
     fun refresh() {
         loadData()
     }
+
+    fun refreshUserName() {
+        viewModelScope.launch {
+            val user = authRepository.getCurrentUser().first()
+            if (user != null) {
+                _uiState.update {
+                    it.copy(
+                        userName = user.displayName.ifEmpty { "Player" },
+                        userPhotoUrl = user.photoUrl
+                    )
+                }
+            }
+        }
+    }
 }

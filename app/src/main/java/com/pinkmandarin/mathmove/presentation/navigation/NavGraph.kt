@@ -201,7 +201,8 @@ fun NavGraph(
             )
         }
 
-        composable(Screen.Home.route) {
+        composable(Screen.Home.route) { backStackEntry ->
+            val nameUpdated = backStackEntry.savedStateHandle.get<Boolean>("nameUpdated") == true
             HomeScreen(
                 onStageClick = { stageNumber ->
                     tryNavigateToGame(stageNumber)
@@ -211,6 +212,10 @@ fun NavGraph(
                 },
                 onSettingsClick = {
                     navController.navigate(Screen.Settings.route)
+                },
+                nameUpdated = nameUpdated,
+                onNameUpdateConsumed = {
+                    backStackEntry.savedStateHandle["nameUpdated"] = false
                 }
             )
         }
@@ -276,6 +281,11 @@ fun NavGraph(
                     navController.navigate(Screen.Login.route) {
                         popUpTo(0) { inclusive = true }
                     }
+                },
+                onNameUpdated = {
+                    navController.previousBackStackEntry
+                        ?.savedStateHandle
+                        ?.set("nameUpdated", true)
                 }
             )
         }
