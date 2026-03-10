@@ -23,6 +23,15 @@ android {
         }
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("../mathmove-release.jks")
+            storePassword = "2417bgbgbG@"
+            keyAlias = "mathmove"
+            keyPassword = "2417bgbgbG@"
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -30,6 +39,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 
@@ -120,6 +130,10 @@ dependencies {
 
     // Core KTX
     implementation("androidx.core:core-ktx:1.12.0")
+
+    // In-App Update
+    implementation("com.google.android.play:app-update:2.1.0")
+    implementation("com.google.android.play:app-update-ktx:2.1.0")
 
     // Testing
     testImplementation("junit:junit:4.13.2")
