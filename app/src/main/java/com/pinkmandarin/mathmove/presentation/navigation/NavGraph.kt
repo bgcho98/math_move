@@ -26,6 +26,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -57,6 +58,7 @@ import com.pinkmandarin.mathmove.presentation.result.ResultScreen
 import com.pinkmandarin.mathmove.presentation.settings.SettingsScreen
 import com.pinkmandarin.mathmove.presentation.splash.SplashScreen
 import com.pinkmandarin.mathmove.presentation.theme.PrimaryOrange
+import com.pinkmandarin.mathmove.util.BillingManager
 import com.pinkmandarin.mathmove.util.Constants
 
 sealed class Screen(val route: String) {
@@ -92,7 +94,23 @@ fun NavGraph(
     var showAdDialog by remember { mutableStateOf(false) }
     var pendingStageNumber by remember { mutableIntStateOf(0) }
     var isAdLoading by remember { mutableStateOf(false) }
+    var isPremium by remember { mutableStateOf(dailyPlayManager.isPremium()) }
     var remainingPlays by remember { mutableIntStateOf(dailyPlayManager.getRemainingPlays()) }
+
+    val billingManager = remember {
+        BillingManager(context) { purchased ->
+            if (purchased) {
+                dailyPlayManager.setPremium(true)
+                isPremium = true
+                remainingPlays = dailyPlayManager.getRemainingPlays()
+            }
+        }
+    }
+
+    DisposableEffect(Unit) {
+        billingManager.startConnection()
+        onDispose { billingManager.endConnection() }
+    }
 
     fun navigateToGame(stageNumber: Int, popUpToHome: Boolean = false) {
         dailyPlayManager.incrementPlayCount()
@@ -153,13 +171,18 @@ fun NavGraph(
     if (showAdDialog) {
         DailyLimitDialog(
             isAdLoading = isAdLoading,
+            isPremium = isPremium,
+            purchasePrice = billingManager.getFormattedPrice(),
             onWatchAd = {
                 loadAndShowRewardedAd {
                     showAdDialog = false
-                    // Ad watched: navigate without incrementing play count (1 free game)
-                    val sn = pendingStageNumber
-                    navController.navigate(Screen.Game.createRoute(sn))
+                    dailyPlayManager.addBonusPlays(Constants.AD_BONUS_PLAYS)
+                    remainingPlays = dailyPlayManager.getRemainingPlays()
+                    navigateToGame(pendingStageNumber)
                 }
+            },
+            onPurchase = {
+                billingManager.launchPurchaseFlow(activity)
             },
             onDismiss = {
                 if (!isAdLoading) {
@@ -286,6 +309,11 @@ fun NavGraph(
                     navController.previousBackStackEntry
                         ?.savedStateHandle
                         ?.set("nameUpdated", true)
+                },
+                isPremium = isPremium,
+                purchasePrice = billingManager.getFormattedPrice(),
+                onPurchaseClick = {
+                    billingManager.launchPurchaseFlow(activity)
                 }
             )
         }
@@ -295,7 +323,10 @@ fun NavGraph(
 @Composable
 private fun DailyLimitDialog(
     isAdLoading: Boolean,
+    isPremium: Boolean,
+    purchasePrice: String?,
     onWatchAd: () -> Unit,
+    onPurchase: () -> Unit,
     onDismiss: () -> Unit
 ) {
     Dialog(onDismissRequest = onDismiss) {
@@ -331,6 +362,7 @@ private fun DailyLimitDialog(
 
             Spacer(modifier = Modifier.height(24.dp))
 
+            // Watch ad button
             Button(
                 onClick = onWatchAd,
                 enabled = !isAdLoading,
@@ -367,6 +399,44 @@ private fun DailyLimitDialog(
             }
 
             Spacer(modifier = Modifier.height(12.dp))
+
+            // Purchase unlimited button
+            if (!isPremium) {
+                Button(
+                    onClick = onPurchase,
+                    enabled = !isAdLoading,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(52.dp),
+                    shape = RoundedCornerShape(16.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF6C63FF))
+                ) {
+                    Text(
+                        text = "\uD83D\uDC8E",
+                        fontSize = 20.sp
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = stringResource(
+                            R.string.purchase_unlimited,
+                            purchasePrice ?: stringResource(R.string.purchase_price_default)
+                        ),
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(4.dp))
+
+                Text(
+                    text = stringResource(R.string.purchase_unlimited_desc),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = Color.Gray,
+                    textAlign = TextAlign.Center
+                )
+
+                Spacer(modifier = Modifier.height(12.dp))
+            }
 
             OutlinedButton(
                 onClick = onDismiss,

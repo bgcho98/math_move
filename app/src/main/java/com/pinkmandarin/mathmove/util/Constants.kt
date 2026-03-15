@@ -4,7 +4,7 @@ object Constants {
     // Game Settings
     const val PROBLEMS_PER_STAGE = 5
     const val INITIAL_LIVES = 3
-    const val POSE_HOLD_DURATION = 1500L // milliseconds
+    const val POSE_HOLD_DURATION = 1000L // milliseconds
     const val DEFAULT_PROBLEM_TIME = 60_000L // 60 seconds per problem
     const val MIN_PROBLEM_TIME = 30_000L // minimum 30 seconds for harder stages
 
@@ -19,6 +19,10 @@ object Constants {
 
     // Daily Play Limit
     const val DAILY_FREE_PLAYS = 3
+    const val AD_BONUS_PLAYS = 3
+
+    // In-App Purchase
+    const val PRODUCT_ID_UNLIMITED_PLAY = "unlimited_play"
 
     // Firebase Collections
     const val COLLECTION_USERS = "users"

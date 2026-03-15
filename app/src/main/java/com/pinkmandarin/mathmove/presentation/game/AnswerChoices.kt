@@ -12,13 +12,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -189,92 +189,88 @@ private fun AnswerChoiceCard(
                 color = borderColor,
                 shape = RoundedCornerShape(16.dp)
             )
-            .padding(horizontal = 6.dp, vertical = 6.dp)
     ) {
-        Column(
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                // Character animation
+        // Fill effect: neon color fills from left to right (behind content)
+        val fillFraction = if (isDetected) animatedProgress else 0f
+        if (fillFraction > 0f) {
+            Box(modifier = Modifier.matchParentSize()) {
                 Box(
-                    modifier = Modifier.size(70.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Crossfade(
-                        targetState = showTargetPose,
-                        animationSpec = tween(400),
-                        label = "poseTransition"
-                    ) { isTarget ->
-                        Image(
-                            painter = painterResource(
-                                id = if (isTarget) targetImageRes
-                                else R.drawable.neon_human_base
-                            ),
-                            contentDescription = getPoseLabel(action),
-                            modifier = Modifier
-                                .size(70.dp)
-                                .graphicsLayer(
-                                    scaleX = if (mirrorX) -1.8f else 1.8f,
-                                    scaleY = 1.8f
-                                )
-                        )
-                    }
-                }
+                    modifier = Modifier
+                        .fillMaxWidth(fillFraction)
+                        .fillMaxHeight()
+                        .background(neonColor.copy(alpha = 0.25f))
+                )
+            }
+        }
 
-                Spacer(modifier = Modifier.width(4.dp))
-
-                // Answer text next to character
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.weight(1f)
-                ) {
-                    Text(
-                        text = "${answer ?: "?"}",
-                        style = TextStyle(
-                            fontSize = 40.sp,
-                            fontWeight = FontWeight.ExtraBold,
-                            shadow = Shadow(
-                                color = neonColor,
-                                offset = Offset.Zero,
-                                blurRadius = 16f
-                            )
+        // Content (determines parent size)
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 6.dp, vertical = 6.dp)
+        ) {
+            // Character animation
+            Box(
+                modifier = Modifier.size(80.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Crossfade(
+                    targetState = showTargetPose,
+                    animationSpec = tween(400),
+                    label = "poseTransition"
+                ) { isTarget ->
+                    Image(
+                        painter = painterResource(
+                            id = if (isTarget) targetImageRes
+                            else R.drawable.neon_human_base
                         ),
-                        color = Color.White,
-                        textAlign = TextAlign.Center
-                    )
-                    Text(
-                        text = getPoseLabel(action),
-                        style = TextStyle(
-                            fontSize = 11.sp,
-                            fontWeight = FontWeight.Bold,
-                            shadow = Shadow(
-                                color = neonColor,
-                                offset = Offset.Zero,
-                                blurRadius = 8f
+                        contentDescription = getPoseLabel(action),
+                        modifier = Modifier
+                            .size(80.dp)
+                            .graphicsLayer(
+                                scaleX = if (mirrorX) -1.8f else 1.8f,
+                                scaleY = 1.8f
                             )
-                        ),
-                        color = neonColor
                     )
                 }
             }
 
-            // Hold progress bar at the bottom
-            Spacer(modifier = Modifier.height(4.dp))
-            LinearProgressIndicator(
-                progress = if (isDetected) animatedProgress else 0f,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(5.dp)
-                    .clip(RoundedCornerShape(3.dp)),
-                color = neonColor,
-                trackColor = if (isDetected && holdProgress > 0f)
-                    neonColor.copy(alpha = 0.2f)
-                else
-                    Color.Transparent
-            )
+            Spacer(modifier = Modifier.width(4.dp))
+
+            // Answer text next to character
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.weight(1f)
+            ) {
+                Text(
+                    text = "${answer ?: "?"}",
+                    style = TextStyle(
+                        fontSize = 52.sp,
+                        fontWeight = FontWeight.ExtraBold,
+                        shadow = Shadow(
+                            color = neonColor,
+                            offset = Offset.Zero,
+                            blurRadius = 16f
+                        )
+                    ),
+                    color = Color.White,
+                    textAlign = TextAlign.Center
+                )
+                Text(
+                    text = getPoseLabel(action),
+                    style = TextStyle(
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.Bold,
+                        shadow = Shadow(
+                            color = neonColor,
+                            offset = Offset.Zero,
+                            blurRadius = 8f
+                        )
+                    ),
+                    color = neonColor
+                )
+            }
         }
     }
 }

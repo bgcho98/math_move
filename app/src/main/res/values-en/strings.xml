@@ -70,9 +70,14 @@
     <string name="ad_loading">Loading ad…</string>
     <string name="ad_watch">Watch an ad to start the game</string>
     <string name="daily_limit_title">Daily plays used up!</string>
-    <string name="daily_limit_message">You can play 3 times a day for free.\nWatch an ad to play 1 more game!</string>
-    <string name="daily_limit_watch_ad">Watch ad to continue</string>
+    <string name="daily_limit_message">You can play 3 times a day for free.\nWatch an ad to play 3 more games!</string>
+    <string name="daily_limit_watch_ad">Watch ad for 3 more games</string>
     <string name="daily_limit_later">Maybe later</string>
+    <string name="purchase_unlimited">Unlimited Play (%1$s)</string>
+    <string name="purchase_unlimited_desc">Buy once, play forever without ads!</string>
+    <string name="purchase_price_default">\u20A95,000</string>
+    <string name="purchase_activated">Unlimited Play Activated</string>
+    <string name="settings_purchase">Purchase</string>
 
     <!-- Permission -->
     <string name="camera_permission_title">Camera Permission Required</string>

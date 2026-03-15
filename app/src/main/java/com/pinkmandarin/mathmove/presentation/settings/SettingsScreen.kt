@@ -62,6 +62,7 @@ import com.pinkmandarin.mathmove.R
 import android.content.Intent
 import android.net.Uri
 import coil.compose.AsyncImage
+import androidx.compose.material.icons.filled.Star
 import com.pinkmandarin.mathmove.presentation.theme.AvatarRingEnd
 import com.pinkmandarin.mathmove.presentation.theme.AvatarRingStart
 import com.pinkmandarin.mathmove.presentation.theme.BubblePeach
@@ -79,6 +80,9 @@ fun SettingsScreen(
     onBackClick: () -> Unit,
     onLoggedOut: () -> Unit,
     onNameUpdated: () -> Unit = {},
+    isPremium: Boolean = false,
+    purchasePrice: String? = null,
+    onPurchaseClick: () -> Unit = {},
     viewModel: SettingsViewModel = hiltViewModel()
 ) {
     val context = androidx.compose.ui.platform.LocalContext.current
@@ -323,6 +327,24 @@ fun SettingsScreen(
                         onClick = {
                             context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://bgcho98.github.io/PinkMandarin/math-move/privacy.html")))
                         }
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(24.dp))
+
+                // ===== Purchase Section =====
+                SectionLabel(stringResource(R.string.settings_purchase))
+                Spacer(modifier = Modifier.height(8.dp))
+
+                SettingsMenuGroup {
+                    SettingsMenuItem(
+                        icon = Icons.Default.Star,
+                        iconTint = if (isPremium) StarGold else Color(0xFF6C63FF),
+                        title = if (isPremium) stringResource(R.string.purchase_activated)
+                                else stringResource(R.string.purchase_unlimited,
+                                    purchasePrice ?: stringResource(R.string.purchase_price_default)),
+                        titleColor = if (isPremium) StarGold else Color.White,
+                        onClick = { if (!isPremium) onPurchaseClick() }
                     )
                 }
 

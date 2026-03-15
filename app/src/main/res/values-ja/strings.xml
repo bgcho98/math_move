@@ -61,9 +61,18 @@
     <string name="ranking_empty">まだ記録がありません</string>
     <string name="rank_format">%d位</string>
 
-    <!-- Ad -->
+    <!-- Ad / Daily Limit -->
     <string name="ad_loading">広告読み込み中…</string>
     <string name="ad_watch">広告を視聴するとゲームが始まります</string>
+    <string name="daily_limit_title">今日のプレイ完了!</string>
+    <string name="daily_limit_message">1日3回無料プレイ可能!\n広告を見ると3ゲーム追加できます!</string>
+    <string name="daily_limit_watch_ad">広告を見て3回プレイ</string>
+    <string name="daily_limit_later">また今度</string>
+    <string name="purchase_unlimited">無制限プレイ (%1$s)</string>
+    <string name="purchase_unlimited_desc">一度の購入で広告なし無制限!</string>
+    <string name="purchase_price_default">\u20A95,000</string>
+    <string name="purchase_activated">無制限プレイ有効中</string>
+    <string name="settings_purchase">購入</string>
 
     <!-- Permission -->
     <string name="camera_permission_title">カメラの権限が必要です</string>

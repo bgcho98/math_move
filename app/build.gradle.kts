@@ -8,14 +8,14 @@ plugins {
 
 android {
     namespace = "com.pinkmandarin.mathmove"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.pinkmandarin.mathmove"
         minSdk = 26
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        targetSdk = 35
+        versionCode = 3
+        versionName = "1.0.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -106,6 +106,9 @@ dependencies {
 
     // AdMob
     implementation("com.google.android.gms:play-services-ads:22.6.0")
+
+    // Google Play Billing
+    implementation("com.android.billingclient:billing-ktx:6.1.0")
 
     // CameraX
     val cameraxVersion = "1.3.1"
